@@ -1,0 +1,49 @@
+package com.app.hospital.Controller;
+
+import com.app.hospital.Entity.Patient;
+import com.app.hospital.Service.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/patients")
+public class PatientController {
+
+    @Autowired
+    private PatientService patientService;
+
+    @PostMapping
+    public Patient addPatient(@RequestBody Patient patient) {
+        return patientService.savePatient(patient);
+    }
+
+    @GetMapping
+    public List<Patient> getAllPatients() {
+        return patientService.getAllPatients();
+    }
+
+    @GetMapping("/{id}")
+    public Patient getPatientById(@PathVariable Long id) {
+        return patientService.getPatientById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePatient(@PathVariable Long id) {
+        patientService.deletePatient(id);
+    }
+
+    @PutMapping("/{id}")
+    public Patient updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
+       
+        return patientService.savePatient(patient);
+    }
+
+    @GetMapping("/page")
+    public Page<Patient> getPatientsWithPagination(@RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "5") int size) {
+        return patientService.getAllPatients(page, size);
+    }
+}
