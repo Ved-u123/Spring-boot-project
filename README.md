@@ -33,3 +33,17 @@ bash
 cd frontend
 npm install
 ng serve
+
+Backend Setup (Spring Boot)
+
+cd backend
+mvn clean install
+mvn spring-boot:run
+
+# Angular frontend
+ng test
+
+# Java backend
+mvn test
+
+
